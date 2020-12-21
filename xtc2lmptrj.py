@@ -1,8 +1,8 @@
 import os
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('-i', type=str, default=r'J:\TrjData\workstation\64me_290', help="Path to input file")
-parser.add_argument('-o', type=str, default=r'J:\TrjData\64me_290_', help="Path to output files")
+parser.add_argument('-i', type=str, default=r'J:\TrjData\workstation\64me_310K', help="Path to input file")
+parser.add_argument('-o', type=str, default=r'J:\TrjData\64me_310K_', help="Path to output files")
 parser.add_argument('-v', type=str, default=r'E:\vmd\vmd.exe', help="Path to VMD")
 parser.add_argument('-n', type=int, default=10, help="Skip every n frames")
 args = parser.parse_args()
@@ -15,8 +15,9 @@ PROJECT_DIR_PATH = os.path.dirname(os.path.abspath(os.path.abspath(__file__)))
 
 DIR_PATH = os.path.join(PROJECT_DIR_PATH, foldersPATH)
 outputPATH = os.path.join(PROJECT_DIR_PATH, outputPATH)
+vmdtcl=os.path.join(PROJECT_DIR_PATH,'vmdscript.tcl')
 folders = os.listdir(DIR_PATH)
-vmdscript=open('vmdscript.tcl','w')
+vmdscript=open(vmdtcl,'w')
 try:
     os.mkdir(outputPATH)
 
@@ -46,4 +47,4 @@ for folder in folders:
 vmdscript.close()
 
 
-os.system(repr(vmdpath).strip('\'')+' -dispdev text -e vmdscript.tcl')
+os.system(repr(vmdpath).strip('\'')+' -dispdev text -e '+vmdtcl)
